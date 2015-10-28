@@ -7,6 +7,7 @@ var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
 var karma = require('karma').server;
+var coverageEnforcer = require("gulp-istanbul-enforcer");
 
 var paths = {
   sass: ['./scss/**/*.scss']
@@ -51,7 +52,7 @@ gulp.task('git-check', function(done) {
   done();
 });
 
-gulp.task('test', function(done) {
+gulp.task('run-tests', function(done) {
     karma.start({
         configFile: __dirname + '/tests/karma.conf.js',
         singleRun: true
@@ -59,3 +60,25 @@ gulp.task('test', function(done) {
         done();
     });
 });
+
+gulp.task('enforce-coverage', function () {
+  var options = {
+        thresholds : {
+          statements : 100,
+          branches : 10,
+          lines : 10,
+          functions : 10
+        },
+        coverageDirectory : 'report/coverage',
+        rootDirectory : ''
+      };
+  return gulp
+    .src('.')
+    .pipe(coverageEnforcer(options));
+});
+
+gulp.task('done', function(){
+  console.log('ALL FINE!');
+});
+
+gulp.task('test', ['run-tests', 'enforce-coverage', 'done']);

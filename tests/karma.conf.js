@@ -44,11 +44,17 @@ module.exports = function(config) {
         reporters: [{
                       type: 'html',
                       subdir: 'report-html'
-                    }, {
+                    },
+                    {
                       type: 'lcov',
                       subdir: 'report-lcov'
-                    }, {
+                    },
+                    {
                       type: 'text-summary'
+                    },
+                    {
+                      type: 'json',
+                      subdir: 'report-json'
                     }]
     },
 
