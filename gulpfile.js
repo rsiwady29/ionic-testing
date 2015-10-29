@@ -64,7 +64,7 @@ gulp.task('run-tests', function(done) {
 gulp.task('enforce-coverage', function () {
   var options = {
         thresholds : {
-          statements : 100,
+          statements : 10,
           branches : 10,
           lines : 10,
           functions : 10
