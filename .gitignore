@@ -4,4 +4,5 @@
 node_modules/
 platforms/
 plugins/
-report/coverage
+report/coverage/
+www/lib/
